@@ -45,6 +45,9 @@ namespace :vlad do
   set(:unicorn_pid)         { "#{shared_path}/pids/unicorn.pid" }
   set :unicorn_use_preload, false
 
+  append(:ancillary_dir)    { File.dirname(unicorn_pid) }
+  append(:ancillary_dir)    { "#{shared_path}/logs" }
+
   desc "Stop the app servers"
   remote_task :stop_app, :roles => :app do
     Vlad::Unicorn.stop

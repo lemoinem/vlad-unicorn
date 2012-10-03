@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
 
   gem.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"] + gem.files.grep(%r{^docs/})
 
-  gem.add_runtime_dependency "vlad", ["~> 2.0"]
+  gem.add_runtime_dependency "vlad", ["~> 2.3"]
 end
