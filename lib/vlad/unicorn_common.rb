@@ -31,7 +31,7 @@ module Vlad
 
     def self.start(opts = '')
       maybe_sudo if_not_signal(unicorn_restart_signal,
-                               %(#{unicorn_command} -D --config-file "#{unicorn_config}" #{opts}))
+                               %(#{unicorn_command} -D -E "#{unicorn_env}" --config-file "#{unicorn_config}" #{opts}))
     end
 
     def self.stop
@@ -47,6 +47,7 @@ namespace :vlad do
   set :unicorn_use_sudo,    false
   set(:unicorn_pid)         { "#{shared_path}/pids/unicorn.pid" }
   set :unicorn_use_preload, false
+  set(:unicorn_env)         { begin rails_env rescue Rake::FetchError => e "production" end }
 
   append(:ancillary_dir)    { File.dirname(unicorn_pid) }
   append(:ancillary_dir)    { "#{shared_path}/logs" }
