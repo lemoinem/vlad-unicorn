@@ -47,7 +47,7 @@ namespace :vlad do
   set :unicorn_use_sudo,    false
   set(:unicorn_pid)         { "#{shared_path}/pids/unicorn.pid" }
   set :unicorn_use_preload, false
-  set(:unicorn_env)         { begin rails_env rescue Rake::FetchError => e "production" end }
+  set(:unicorn_env)         { begin rails_env ; rescue Rake::FetchError => e ; "production" end }
 
   append(:ancillary_dir)    { File.dirname(unicorn_pid) }
   append(:ancillary_dir)    { "#{shared_path}/logs" }
